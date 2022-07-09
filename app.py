@@ -2,6 +2,7 @@ import os
 import cv2
 
 from flask import Flask, request
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
 from ocr import ocr_model
@@ -12,6 +13,7 @@ if not os.path.isdir(UPLOAD_FOLDER):
 	os.makedirs(UPLOAD_FOLDER) 
 
 app = Flask(__name__)
+CORS(app)
 
 def allowed_file(filename):
     return '.' in filename and \
