@@ -1,1 +1,1 @@
-web: gunicorn scanthisreceipt:app
+web: gunicorn app:wsgi
