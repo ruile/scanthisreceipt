@@ -2,8 +2,8 @@ import re
 from PIL import Image
 from paddleocr import PaddleOCR, draw_ocr
 
-DET_DIR = "./flaskr/models/en_PP-OCRv3_det_infer"
-REC_DIR = "./flaskr/models/en_PP-OCRv3_rec_infer"
+DET_DIR = "./models/en_PP-OCRv3_det_infer"
+REC_DIR = "./models/en_PP-OCRv3_rec_infer"
 
 DICTIONARY = {
 	"PERISHABLE_DRINK": ["MK", "MILK"],

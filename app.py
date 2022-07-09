@@ -4,10 +4,10 @@ import cv2
 from flask import Flask, request
 from werkzeug.utils import secure_filename
 
-from flaskr.ocr import ocr_model
+from ocr import ocr_model
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
-UPLOAD_FOLDER = './flaskr/upload'
+UPLOAD_FOLDER = './upload'
 if not os.path.isdir(UPLOAD_FOLDER):
 	os.makedirs(UPLOAD_FOLDER) 
 
@@ -30,11 +30,11 @@ def scan():
 	if file.filename == '':
 		return { "error": "invalid file" }, 400
 	if file and allowed_file(file.filename):
-		print("file", file)
+		# print("file", file)
 		filename = secure_filename(file.filename)
 		filepath = os.path.join(UPLOAD_FOLDER, filename)
 		file.save(filepath)
-		print("filename", filename)
+		# print("filename", filename)
 		img = cv2.imread(filepath)
 		result = ocr_model.scan(img)
 
