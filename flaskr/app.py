@@ -4,10 +4,10 @@ import cv2
 from flask import Flask, request
 from werkzeug.utils import secure_filename
 
-from ocr import ocr_model
+from flaskr.ocr import ocr_model
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
-UPLOAD_FOLDER = './upload'
+UPLOAD_FOLDER = './flaskr/upload'
 if not os.path.isdir(UPLOAD_FOLDER):
 	os.makedirs(UPLOAD_FOLDER) 
 
