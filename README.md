@@ -1,1 +1,1 @@
-"# scanthisreceipt" 
+# scanthisreceipt
