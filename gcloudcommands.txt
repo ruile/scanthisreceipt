@@ -1,0 +1,8 @@
+BUILD
+docker build . -t scanthisreceipt
+
+TAG
+docker tag scanthisreceipt asia-southeast1-docker.pkg.dev/civil-array-355816/foodregistry/scanthisreceipt-image:tag4
+
+PUSH with TAG
+docker push asia-southeast1-docker.pkg.dev/civil-array-355816/foodregistry/scanthisreceipt-image:tag4

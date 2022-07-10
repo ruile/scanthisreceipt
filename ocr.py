@@ -6,20 +6,21 @@ DET_DIR = "./models/en_PP-OCRv3_det_infer"
 REC_DIR = "./models/en_PP-OCRv3_rec_infer"
 
 DICTIONARY = {
-	"PERISHABLE_DRINK": ["MK", "MILK"],
-	"FISH": ["BASS", "SALMON"],
-	"FRUIT": ["BANANA", "APPLE", "ORANGE"],
-	"VEGETABLE": ["ONION", "TOMATO", "GRAPE", "PANDAN"],
+	"PERISHABLE_DRINK": ["MK", "MILK", "JUICE"],
+	"FISH": ["BASS", "SALMON", "SABA", "TUNA", "SWORDFISH"],
+	"FRUIT": ["BANANA", "APPLE", "ORANGE", "PEACH", "DURIAN", "KIWI", "PEAR", "GRAPE"],
+	"VEGETABLE": ["ONION", "TOMATO", "PANDAN", "CAI", "LETTUCE", "CUCUMBER"],
+	"MEAT": ["CHICKEN", "BEEF", "LAMB", "PORK"]
 }
 
 MULTIPLE = re.compile(r"\d+X\$")
 
 class OCR():
 	def __init__(self):
-		self.model = PaddleOCR(lang="en", det_model_dir=DET_DIR, rec_model_dir=REC_DIR)
+		self.model = PaddleOCR(lang="en", det_model_dir=DET_DIR, rec_model_dir=REC_DIR, use_angle_cls=False)
 
 	def scan(self, img):
-		result = self.model.ocr(img)
+		result = self.model.ocr(img, cls=False)
 		items = []
 		
 		for i in range(len(result) - 1):
@@ -39,7 +40,7 @@ class OCR():
 							has_cateogory = True
 				
 				if not has_cateogory:
-					detected_category = "uncategorised"
+					detected_category = "UNCATEGORISED"
 					itemObj = {"name": line1, "category": detected_category}
 					items.append(itemObj)
 			else:

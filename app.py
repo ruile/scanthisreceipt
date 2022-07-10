@@ -23,7 +23,7 @@ def allowed_file(filename):
 def health():
 	return "Hello!"
 
-@app.route('/scan', methods=["POST"])
+@app.route('/scan/', methods=["POST"])
 def scan():
 	if "file" not in request.files:
 		return { "error": "no file" }, 400
@@ -31,7 +31,8 @@ def scan():
 	file = request.files['file']
 	if file.filename == '':
 		return { "error": "invalid file" }, 400
-	if file and allowed_file(file.filename):
+	# if file and allowed_file(file.filename):
+	if file:
 		# print("file", file)
 		filename = secure_filename(file.filename)
 		filepath = os.path.join(UPLOAD_FOLDER, filename)
@@ -43,4 +44,9 @@ def scan():
 		# delete file
 		os.remove(filepath)
 
-	return { "data": result }, 200
+		return { "data": result }, 200
+
+	return { "error": "something went wrong" }, 400
+
+if __name__ == "main":
+	app.run(debug=True)
